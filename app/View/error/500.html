@@ -1,0 +1,20 @@
+{% extends layout %}
+
+{% block title %}{{ 'An error occurred during server processing.'|t('error') }}{% endblock %}
+
+{% block contents %}
+
+<section id="main">
+
+    <h1>{{ 'An error occurred during server processing.'|t('error') }}</h1>
+
+    {% if error_info %}
+    <p class="error">
+        <small>{{ error_info.file|e}} @{{ error_info.line }}</small><br>
+        {{ error_info.message|e }}
+    </p>
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% macro pager(object) %}
+{% if attribute(object, 'hasPages') is defined and object.hasPages() %}
+<ul class="pager">
+    <li>Total: {{ object.total()|number_format }}</li>
+    {% if object.prev() %}<li class="prev"><a href="javascript:$M.go({page: {{ object.prev() }}});">Prev</a></li>{% endif %}
+{% for page in object.pages() %}
+    {% if page.skip %}
+    <li class="skip">...</li>
+    {% else %}
+    <li class="{{ page.current ? 'current' : '' }}"><a href="javascript:$M.go({page: {{ page.num }}});">{{ page.num }}</a></i>
+    {% endif %}
+{% endfor %}
+    {% if object.next() %}<li class="next"><a href="javascript:$M.go({page: {{ object.next() }}});">Next</a></li>{% endif %}
+</ul>
+{% endif %}
+{% endmacro %}

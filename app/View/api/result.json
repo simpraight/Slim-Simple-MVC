@@ -1,0 +1,2 @@
+{# encoding=UTF-8 #}
+{{ result|json_encode|raw }}

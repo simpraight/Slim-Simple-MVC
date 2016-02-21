@@ -1,0 +1,35 @@
+{
+  "development": {
+      "default": {
+            "type": "mysql"
+          , "host": "localhost"
+          , "port": "3306"
+          , "name": "dbname_dev"
+          , "user": "root"
+          , "pass": "password"
+          , "logging": true
+      }
+  }
+  , "production": {
+      "default": {
+            "type": "mysql"
+          , "host": "localhost"
+          , "port": "3306"
+          , "name": "dbname"
+          , "user": "root"
+          , "pass": "password"
+          , "logging": false
+      }
+  }
+  , "test": {
+      "default": {
+            "type": "mysql"
+          , "host": "localhost"
+          , "port": "3306"
+          , "name": "dbname_test"
+          , "user": "root"
+          , "pass": "password"
+          , "logging": true
+      }
+  }
+}

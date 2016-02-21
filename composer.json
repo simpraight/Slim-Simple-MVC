@@ -1,0 +1,23 @@
+{
+    "name": "simpraight/Slim-Simple-MVC"
+  , "authors": [
+    {
+          "name": "Shinya Matsushita"
+        , "email": "simpraight@gmail.com"
+    }
+  ]
+  , "minimum-stability": "stable"
+  , "require": {
+      "slim/slim": "2.*"
+    , "slim/views": "0.*"
+    , "twig/twig": "1.*"
+    , "j4mie/idiorm": "*"
+    , "j4mie/paris": "*"
+    , "symfony/yaml": "2.*"
+  }
+  , "autoload": {
+      "psr-4": {
+          "SlimMVC\\": "./app"
+      }
+  }
+}

@@ -1,0 +1,7 @@
+{% macro error(message,id) %}
+{% if message %}<div class="error"{% if id %} id="{{ id|e }}"{% endif %}><i class="fa fa-exclamation-circle fa-fw"></i> {{ message|e }}</div>{% endif %}
+{% endmacro %}
+
+{% macro operate(name) %}
+<input type="hidden" name="operate" value="{{ otk(name)|e }}" />
+{% endmacro %}
