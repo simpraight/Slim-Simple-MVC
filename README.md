@@ -245,7 +245,7 @@ class User extends \SlimMVC\Model
 {
   public function validate()
   {
-    $this->validatesPrecenseOf(array('name', 'account', 'password'));
+    $this->validatesPresenceOf(array('name', 'account', 'password'));
     $this->validatesLengthOf('name', 1, 32);
     $this->validatesFormatOf('password', '/^[a-f\d]{40}$/');
   }
@@ -253,7 +253,7 @@ class User extends \SlimMVC\Model
   public function beforeSave()
   {
     $this->updated_at = date('Y-m-d H:i:s');
-    return parent::beforeSave(); // true
+    return parent::beforeSave();
   }
   
   public function beforeCreate()
@@ -292,9 +292,11 @@ class Hoge extends \SlimMVC\Model
 Translate
 ------------
 
-If you want to support multiple languages ​​in your application
+If you want to support multiple languages in your application.
 
-- 
+
+- using translation in view template
+
 "app/View/page/index.html"
 ```html
 
@@ -302,6 +304,20 @@ If you want to support multiple languages ​​in your application
 
 <h1>{{ 'My Page'|t }}</h1> // supported multi-languages.
 
+```
+
+- using translation in controller
+
+"app/Controller/Page.php"
+```php
+<?php
+
+use \SlimMVC\Util;
+
+// snip
+
+  $this->assign('title', 'My Page');  // Not multi-languages.
+  $this->assign('title', Util::translate('My Page'));  // supported multi-languages.
 ```
 
 - Language file
