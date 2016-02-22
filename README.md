@@ -1,5 +1,7 @@
 # Slim-Simple-MVC
 
+This framework is based on the "Slim-Framework", adds a simple MVC implementation.
+
 Routing
 --------
 
@@ -13,7 +15,7 @@ Routing
 }
 ```
 
-- Page Controller
+- nested routing at PageController
 
 "app/Controller/Page.php"
 ```php
@@ -39,7 +41,7 @@ class Page extends \SlimMVC\Controller
 }
 ```
 
-- Hoge Controller
+- nested routing at HogeController
 
 "app/Controller/Hoge.php"
 ```php
@@ -68,9 +70,9 @@ class Hoge extends \SlimMVC\Controller
 View
 ----
 
-- using Twig
+- using the "Twig" as View template.
 - ex) Contoller\Page::index()
-  - it will use view template file "View/page/index.html"
+  - will use "View/page/index.html" as view template file.
 
 "app/View/page/index.html"
 ```html
@@ -84,7 +86,7 @@ View
 {% endblock %}
 ```
 
-- Layout file extended
+- Inherited layout file
 
 "app/View/layout/application.html"
 ```html
@@ -100,6 +102,43 @@ View
 </div>
 </body>
 </html>
+```
+
+View Helpers
+-------------
+
+- Autoloading view helpers (as Twig-extension).
+- ex) ControllerAction: Page::index()
+  - will load helpers "app/Helper/Application.php" and "app/Helper/Page.php"
+
+"app/Helper/Page.php"
+```php
+<?php
+namespace SlimMVC\Helper;
+
+class Page extends \SlimMVC\Helper
+{
+  protected $_name = "page";
+  protected $_functions = array(
+    'getHoge' => 'hoge'
+  );
+  protected $_filters = array(
+    'getHoge' => 'h'
+  );
+  
+  public static function getHoge($str)
+  {
+    return 'hoge' . $str;
+  }
+}
+```
+
+- How to use helper function or filter.
+
+"app/View/page/index.html"
+```html
+{{ hoge("Test") }}  // as a function.
+{{ "Test"|h }} // as a filter.
 ```
 
 Model
@@ -247,4 +286,39 @@ class Hoge extends \SlimMVC\Model
     return orm('Hoge')->where('user_id', $User->id)->delete_many();
   }
 }
+```
+
+
+Translate
+------------
+
+If you want to support multiple languages ​​in your application
+
+- 
+"app/View/page/index.html"
+```html
+
+<h1>My Page</h1>  // Not multi-languages.
+
+<h1>{{ 'My Page'|t }}</h1> // supported multi-languages.
+
+```
+
+- Language file
+
+"config/locales/ja_JP.php"
+```php
+<?php
+return array(
+  'My Page' => '私のページ',
+);
+```
+
+- Locale setting
+
+"config/config.php"
+```php
+<?php
+
+define('APP_LOCALE', 'ja_JP'); // default "en_US".
 ```
